@@ -9,7 +9,7 @@ module Fastlane
           output_file = params[:output].shellescape
           ipa_file = params[:ipa].shellescape
           command = "ixguard -c=#{config_file} -o=#{output_file} #{ipa_file}"
-          FastlaneCore::CommandExecutor.execute(command: 'env -i HOME="$HOME" TERM="$TERM" LC_CTYPE="${LC_ALL:-${LC_CTYPE:-$LANG}}" PATH="$PATH" USER="$USER" ' + command,
+          FastlaneCore::CommandExecutor.execute(command: command,
             print_all: true,
             print_command: false)
         rescue => ex
@@ -59,7 +59,7 @@ module Fastlane
         # See: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
         #
         # [:ios, :mac, :android].include?(platform)
-        true
+        [:ios, :mac].include?(platform)
       end
     end
   end
